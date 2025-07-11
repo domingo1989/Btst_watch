@@ -1,0 +1,32 @@
+name: Build Flutter APK
+
+on:
+  push:
+    branches: [main]  # remplace si tu utilises "master"
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Cloner le dépôt
+        uses: actions/checkout@v3
+
+      - name: 🐦 Installer Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.22.2'
+
+      - name: 📦 Installer les dépendances
+        run: flutter pub get
+
+      - name: 🛠️ Compiler l'APK
+        run: flutter build apk --release
+
+      - name: 📤 Uploader l'APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: AppFlutter-APK
+          path: build/app/outputs/flutter-apk/app-release.apk
