@@ -79,7 +79,7 @@ class _ZoneSelectionPageState extends State<ZoneSelectionPage> {
             ),
             TextField(
               controller: _latMaxController,
-              keyboardType: TextType.number,
+              keyboardType: TextInputType.number,
               decoration: const InputDecoration(labelText: "Latitude max"),
             ),
             TextField(
@@ -350,11 +350,11 @@ class _SurveillancePageState extends State<SurveillancePage> {
                           point: cell.centre,
                           width: 30,
                           height: 30,
-                          builder: (context) => GestureDetector(
+                          child: GestureDetector(
                             onTap: () => _afficherPopup(cell.infos),
                             child: const Icon(Icons.location_on, color: Colors.black),
                           ),
-                        )).toList(),
+                        )).toList().cast<Marker>(),
                       ),
                     ],
                   ),
